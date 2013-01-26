@@ -1,0 +1,42 @@
+import java.awt.event.*;
+import java.util.Random;
+
+import javax.swing.*;
+
+public class EventManager
+{
+	Gooey theGooey; 				//A reference for the gooey
+	
+	String eventText = "Welcome\n";
+	
+	//Setup for the event timer
+	Timer timer;	
+	ActionListener updateEventText;
+	int eventDelay;
+	Random random;
+	int eventDelayRandomizer;
+	
+	
+	public EventManager()
+	{
+		random = new Random();
+		//eventDelayRandomizer = Math.random() * 100;
+		eventDelayRandomizer = random.nextInt();
+		eventDelay = 1000;		
+		
+		timer = new Timer(eventDelay, new ActionListener() {
+			public void actionPerformed(ActionEvent updateEventText)
+			{	
+				
+				System.out.println(eventDelayRandomizer);
+				theGooey = Gooey.Gooey.getInstance();
+				theGooey.setEventText();				
+				timer.restart();
+			}
+		});
+	}			
+	
+
+}
+
+

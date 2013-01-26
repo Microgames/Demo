@@ -1,0 +1,22 @@
+import javax.swing.*;
+
+class HelloWorldApp2
+{
+	public HelloWorldApp2()
+	{
+	JFrame frame = new JFrame("test");
+	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	
+	JPanel pane = new JPanel();
+	JTextArea textArea = new JTextArea();
+	
+	pane.add(textArea);
+	
+	frame.setVisible(true);
+	}
+	
+	public static void main()
+	{
+		HelloWorldApp2 testClass = new HelloWorldApp2();
+	}
+}

@@ -1,0 +1,77 @@
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.*;
+
+class HelloWorldApp2
+{
+	JTextArea textArea;
+	EventManager EventManager;
+	static HelloWorldApp2 testClass;
+	
+	public HelloWorldApp2()
+	{
+	JFrame frame = new JFrame("test");
+	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	
+	EventManager = new EventManager();
+	
+	JPanel pane = new JPanel();
+	
+	pane.setPreferredSize(new Dimension(200,200));
+	
+	textArea = new JTextArea();
+	textArea.setPreferredSize(new Dimension(200,200));
+	
+	pane.add(textArea);
+	
+	frame.getContentPane().add(pane);
+	
+	frame.pack();
+	
+	frame.setVisible(true);
+	
+	EventManager.timer.start();
+	
+	}
+	
+	public void setEventText()
+	{
+		textArea.setText("test");
+	}
+	
+	public HelloWorldApp2 getInstance()
+	{
+		return this;
+	}
+	
+	public static void main(String[] args)
+	{
+		testClass = new HelloWorldApp2();
+	}
+}
+
+class EventManager
+{
+	
+	String eventText = "Welcome";
+	Timer timer;
+	int speed;
+	ActionListener updateEventText;
+	HelloWorldApp2 testClass = HelloWorldApp2.testClass.getInstance();
+
+	
+	public EventManager()
+	{
+		speed = 1000;
+	
+		timer = new Timer(speed, new ActionListener() {
+			public void actionPerformed(ActionEvent updateEventText)
+			{
+				System.out.println(testClass);
+				testClass.setEventText();
+				timer.restart();
+			}
+		});
+	}
+}

@@ -1,0 +1,13 @@
+import java.util.*;
+
+public class TextTask extends TimerTask 
+{	
+	EventManager EventManager;
+	
+	@Override
+	public void run()
+	{
+		EventManager.changeText();
+		EventManager.timer.cancel();		
+	}
+}

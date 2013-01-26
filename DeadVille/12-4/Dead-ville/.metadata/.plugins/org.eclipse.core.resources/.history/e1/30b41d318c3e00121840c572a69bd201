@@ -1,0 +1,61 @@
+import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.Random;
+
+import javax.swing.*;
+
+public class EventManager
+{
+	Gooey theGooey; 				//A reference for the gooey	
+	
+	//Setup for the event timer
+	Timer timer;	
+	ActionListener updateEventText;
+	int eventDelay;
+	Random random;
+	int eventDelayRandomizer;
+	int maxEventDelayTime;
+	int seconds = 100;
+	
+	//Setting up the eventText Array List
+	ArrayList<String> eventTextArray;
+	String eventText = "Welcome\n";
+	int maxEventArraySize;
+	int nextEvent;
+	String spaces = "\n\n";
+	
+	
+	public EventManager()
+	{
+		
+		eventTextArray = new ArrayList<String>();
+		eventTextArray.add("You hear a low growl in the distance." + spaces);
+		eventTextArray.add("A car alarm startles you as it goes off next to you... unexpectedly..." + spaces);
+		eventTextArray.add("Was that footsteps you just heard? You decide you better keep moving." + spaces);
+		
+		random = new Random();
+		maxEventDelayTime = 60;
+		maxEventArraySize = eventTextArray.size();
+		
+		timer = new Timer(eventDelay, new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent updateEventText)
+			{	
+				eventDelayRandomizer = random.nextInt(maxEventDelayTime);
+				eventDelay = (eventDelayRandomizer * seconds);
+				nextEvent = random.nextInt(maxEventArraySize);
+				//System.out.println(eventDelay);
+				eventText = eventTextArray.get(nextEvent);
+				theGooey = Gooey.Gooey.getInstance();
+				theGooey.setEventText();
+				timer.setDelay(eventDelay);
+			}
+		});
+		
+		
+	}			
+	
+
+}
+
+

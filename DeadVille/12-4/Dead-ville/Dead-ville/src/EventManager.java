@@ -1,0 +1,80 @@
+import java.awt.event.*;
+import java.text.*;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Random;
+
+import javax.swing.*;
+
+public class EventManager
+{
+	Gooey theGooey; 				//A reference for the gooey	
+	
+	//Setup for the event timer
+	Timer timer;	
+	ActionListener updateEventText;
+	int eventDelay;
+	Random random;
+	int eventDelayRandomizer;
+	int maxEventDelayTime;
+	int seconds = 1000;
+	
+	//Setting up the eventText Array List
+	ArrayList<String> eventTextArray;
+	String eventText = "Welcome\n";
+	int maxEventArraySize;
+	int nextEvent;
+	String spaces = "\n\n";
+	DateFormat dateTime;
+	
+	
+	public EventManager()
+	{
+		//setup a dateTime formatter for the time stamps
+		dateTime = new SimpleDateFormat("h:mma");
+		
+		//setup a stand in string arrayList for simulating events
+		eventTextArray = new ArrayList<String>();
+		eventTextArray.add("You hear a low growl in the distance." + spaces);
+		eventTextArray.add("A car alarm startles you as it goes off next to you... unexpectedly..." + spaces);
+		eventTextArray.add("Was that footsteps you just heard? You decide you better keep moving." + spaces);
+		
+		//setting up a randomizer to help randomly select events and event frequency
+		random = new Random();
+		maxEventDelayTime = 60;
+		maxEventArraySize = eventTextArray.size();
+		
+		//The event timer that handles outputting events
+		timer = new Timer(eventDelay, new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent updateEventText)
+			{	
+				//Setup a random delay in seconds for each event
+				eventDelayRandomizer = random.nextInt(maxEventDelayTime);
+				eventDelay = (eventDelayRandomizer * seconds);
+				
+				//Apply a time stamp to the event updates
+				Date today = Calendar.getInstance().getTime();
+				String timeStamp = dateTime.format(today);
+				
+				//get the next event from the eventArray randomly
+				nextEvent = random.nextInt(maxEventArraySize);				
+				eventText = timeStamp + ":   " + eventTextArray.get(nextEvent);
+				
+				//reference the gooey and set the text
+				theGooey = Gooey.Gooey.getInstance();
+				theGooey.setEventText();
+				
+				//apply the random delay to the updateEventText timer
+				timer.setDelay(eventDelay);
+			}
+		});
+		
+		
+	}			
+	
+
+}
+
+

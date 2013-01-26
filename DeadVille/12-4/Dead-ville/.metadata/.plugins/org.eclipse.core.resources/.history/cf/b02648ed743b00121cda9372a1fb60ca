@@ -1,0 +1,21 @@
+
+public class Character {
+
+	String characterName = "Josh";
+	short characterHealth = 10;
+	
+	public static void character()
+	{
+		
+	}
+	
+	public int getCharacterHealth()
+	{
+		return this.characterHealth;
+	}
+	
+	public String getCharacterName()
+	{
+		return this.characterName;
+	}
+}

@@ -1,0 +1,17 @@
+{
+  "C:\\Program Files\\Java\\jre7\\lib\\rt.jar": {
+    "location": "C:\\Program Files\\Java\\jre7\\lib\\rt.jar",
+    "status": "UNRESOLVED",
+    "error": "Could not transfer artifact jre:jre:zip:call:1.0.0 from/to remote-models (http://download.eclipse.org/recommenders/models/juno/): GET request of: jre/jre/1.0.0/jre-1.0.0-call.zip from remote-models failed"
+  },
+  "C:\\Users\\Joshua\\Dead-ville\\Dead-ville\\src": {
+    "location": "C:\\Users\\Joshua\\Dead-ville\\Dead-ville\\src",
+    "status": "UNRESOLVED",
+    "error": "No class path info available for \u0027C:\\Users\\Joshua\\Dead-ville\\Dead-ville\\src\u0027. Skipped."
+  },
+  "C:\\Users\\Joshua\\Dead-ville\\test\\src": {
+    "location": "C:\\Users\\Joshua\\Dead-ville\\test\\src",
+    "status": "UNRESOLVED",
+    "error": "No class path info available for \u0027C:\\Users\\Joshua\\Dead-ville\\test\\src\u0027. Skipped."
+  }
+}

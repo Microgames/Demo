@@ -1,0 +1,42 @@
+import java.util.Timer;
+import java.util.TimerTask;
+
+
+public class EventManager 
+{
+	String eventText;
+	Timer timer;
+	TextTask task;
+	Gooey Gooey;
+	
+	public EventManager()
+	{		
+		timer = new Timer();
+		timer.scheduleAtFixedRate(new TextTask(), 0, 1000);
+	}	
+	
+	public String getEventText()
+	{
+		return this.eventText;
+	}
+	
+	public void changeEventText()
+	{		
+		Gooey.mainTextArea.setText(getEventText());
+				 
+	}
+		
+			//subclass which is a timer
+			class TextTask extends TimerTask
+			{					
+				@Override
+				public void run()
+				{	
+					//changeEventText();
+					System.out.println("test");
+				}	
+			}	
+	
+}
+
+

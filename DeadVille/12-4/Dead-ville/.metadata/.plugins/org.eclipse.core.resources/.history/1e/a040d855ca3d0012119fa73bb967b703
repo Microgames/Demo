@@ -1,0 +1,28 @@
+import java.awt.event.*;
+import javax.swing.*;
+
+public class EventManager
+{
+	String eventText = "Welcome";
+	Timer timer;
+	int speed;
+	ActionListener updateEventText;
+	Gooey Gooey;
+	
+	public EventManager()
+	{
+		speed = 1000;
+		
+		timer = new Timer(speed, new ActionListener() {
+			public void actionPerformed(ActionEvent updateEventText)
+			{								
+				System.out.println("test");
+				timer.restart();
+			}
+		});
+	}			
+	
+
+}
+
+

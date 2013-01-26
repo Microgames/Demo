@@ -1,0 +1,10 @@
+import java.util.*;
+
+public class TextTask extends TimerTask 
+{
+	@Override
+	public void run()
+	{
+		System.out.println("Running Simple Task @" + new Date());
+	}
+}

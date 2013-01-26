@@ -1,0 +1,30 @@
+import java.awt.*;
+
+import javax.swing.*;
+
+class HelloWorldApp2
+{
+	public HelloWorldApp2()
+	{
+	JFrame frame = new JFrame("test");
+	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	
+	JPanel pane = new JPanel(new GridBagLayout());
+	GridBagConstraints g = new GridBagConstraints();
+	
+	pane.setPreferredSize(new Dimension(200,200));
+	
+	JTextArea textArea = new JTextArea();
+	textArea.setPreferredSize(new Dimension(200,200));
+	
+	pane.add(textArea);
+	textArea.setText("test");
+	
+	frame.setVisible(true);
+	}
+	
+	public static void main(String[] args)
+	{
+		HelloWorldApp2 testClass = new HelloWorldApp2();
+	}
+}

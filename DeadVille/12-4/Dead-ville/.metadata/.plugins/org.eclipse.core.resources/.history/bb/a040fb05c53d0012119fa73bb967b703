@@ -1,0 +1,120 @@
+
+import java.awt.*;			//import awt and swing for GUI components
+import javax.swing.*;
+import javax.swing.border.Border; //import the border class to work with borders easier
+
+public class Gooey {	
+
+	JFrame frame;
+	EventManager EventManager;
+	JTextArea mainTextArea;
+	
+	public void Gooey()
+	{		
+		//create and setup the frame
+		JFrame frame = new JFrame("Deadville");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//allows the window to be closed with 'x'
+		
+		//creating an instance of the character for testing and getting information
+		Character yourCharacter = new Character();
+		
+		//creating an instance of the event manager
+		EventManager EventManager = new EventManager();
+		
+		//create and setup the main pane with a layout manager
+		JPanel mainPane = new JPanel(new GridBagLayout());
+		GridBagConstraints g = new GridBagConstraints();
+		
+		//create a border called blackBorder that I can use wherever i need one
+		//depends on the import of "Border" from the swing class
+		Border blackBorder = BorderFactory.createLineBorder(Color.black);
+		
+		//setup and align the character pane
+		JTabbedPane tabbedCharacterPane = new JTabbedPane(); //creating the tab pane
+		tabbedCharacterPane.setPreferredSize(new Dimension(200,100));
+		tabbedCharacterPane.setBorder(blackBorder);
+		g.gridx = 0;
+		g.gridy = 0;
+		mainPane.add(tabbedCharacterPane, g);
+		
+		//setup and align the enemy pane
+		JTabbedPane tabbedEnemyPane = new JTabbedPane();
+		tabbedEnemyPane.setPreferredSize(new Dimension(200,100));
+		tabbedEnemyPane.setBorder(blackBorder);
+		g.gridx = 1;
+		g.gridy = 0;
+		mainPane.add(tabbedEnemyPane, g);
+		
+		//setup and align the text pane or mid-pane
+		JTabbedPane tabbedTextPane = new JTabbedPane(); 			//creating the tabbed text pane in the middle
+		tabbedTextPane.setPreferredSize(new Dimension(400,400));	//giving it a preferred size
+		tabbedTextPane.setBorder(blackBorder);						//giving it a border
+		g.gridwidth = 2;											//setting how many cells the text pane takes up
+		g.gridx = 0;												//setting it's position to column 1
+		g.gridy = 1;												//setting it's position to row 2
+		mainPane.add(tabbedTextPane, g);							//adding the tabbed pane to the main gooey
+		mainTextArea = new JTextArea();						//creating a text area for display game events
+		JScrollPane mainScrollPane = new JScrollPane(mainTextArea);	//create a scroll pane and then adding the text area to it
+		mainTextArea.setEditable(false);							//making the text area read-only
+		tabbedTextPane.add("Current Events", mainScrollPane);		//adding the scroll pane(with mainTextPane) to the main tabbed pane
+		
+		//setup and align the timer pane at the bottom
+		JPanel timerPane = new JPanel();
+		timerPane.setPreferredSize(new Dimension(400,35));
+		timerPane.setBorder(blackBorder);
+		g.gridwidth = 2;
+		g.gridx = 0;
+		g.gridy = 2;
+		mainPane.add(timerPane, g);
+
+		
+		//setup the character's tabbed pane		
+		JLabel characterLabel = new JLabel(); 						//creating a label to put into the tab pane 
+		characterLabel.setPreferredSize(new Dimension(180, 60)); 	//setting the size of the label
+		characterLabel.setText("Health: " + Integer.toString(yourCharacter.getCharacterHealth()));//setting the text to character's health
+		characterLabel.setHorizontalAlignment(characterLabel.CENTER);//aligning the text
+		characterLabel.setVerticalAlignment(characterLabel.CENTER);	//aligning the text
+		tabbedCharacterPane.addTab(yourCharacter.getCharacterName(), characterLabel); //adding the label as a tab and the character's name
+		
+		//add the main pane to the frame
+		frame.getContentPane().add(mainPane);
+		
+		//display the window
+		frame.pack(); //sizes the frame so that all content fits
+		
+		//get the size of the screen, set a center point, and then display the window there
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		Point middle = new Point(screenSize.width/2,screenSize.height/2);
+		Point centerScreen = new Point(middle.x - (frame.getWidth()/2),
+									   middle.y - (frame.getHeight()/2));
+		frame.setLocation(centerScreen);			
+		
+		frame.setVisible(true); //displays the window	
+		
+		EventManager.timer.start();
+		
+	}
+
+	public void setEventText()
+	{		
+		mainTextArea.setText(getEventText());		
+	}
+
+	public String getEventText()
+	{		
+		return EventManager.eventText;
+	}	
+	
+	public static void main(String[] args)
+	{
+		//Schedule a job for the event-dispatching thread: (not sure what this means)
+		//creating and showing the gooey
+		javax.swing.SwingUtilities.invokeLater(new Runnable(){
+			public void run() {				
+				new Gooey();
+			}
+		});	
+		
+		
+	}
+}
